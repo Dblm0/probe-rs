@@ -1,0 +1,129 @@
+name: Milandr
+generated_from_pack: true
+pack_file_release: '1.0'
+variants:
+- name: MDR32F1QI
+  cores:
+  - name: main
+    type: armv6m
+    core_access_options: !Arm
+      ap: 0
+      psel: 0
+  memory_map:
+  - !Ram
+    name: IRAM1
+    range:
+      start: 0x20000000
+      end: 0x20008000
+    cores:
+    - main
+  - !Ram
+    name: IRAM2
+    range:
+      start: 0x20100000
+      end: 0x20104000
+    cores:
+    - main
+  - !Nvm
+    name: IROM1
+    range:
+      start: 0x0
+      end: 0x20000
+    is_boot_memory: true
+    cores:
+    - main
+  flash_algorithms:
+  - mdr32f1qi
+- name: MDR32F9Q2I
+  cores:
+  - name: main
+    type: armv7m
+    core_access_options: !Arm
+      ap: 0
+      psel: 0
+  memory_map:
+  - !Ram
+    name: IRAM1
+    range:
+      start: 0x20000000
+      end: 0x20008000
+    cores:
+    - main
+  - !Nvm
+    name: IROM1
+    range:
+      start: 0x8000000
+      end: 0x8020000
+    is_boot_memory: true
+    cores:
+    - main
+  flash_algorithms:
+  - mdr32f9q2i_mdr32fg16s1qi
+- name: MDR32FG16S1QI
+  cores:
+  - name: main
+    type: armv7m
+    core_access_options: !Arm
+      ap: 0
+      psel: 0
+  memory_map:
+  - !Ram
+    name: IRAM1
+    range:
+      start: 0x20000000
+      end: 0x20008000
+    cores:
+    - main
+  - !Nvm
+    name: IROM1
+    range:
+      start: 0x8000000
+      end: 0x8020000
+    is_boot_memory: true
+    cores:
+    - main
+  flash_algorithms:
+  - mdr32f9q2i_mdr32fg16s1qi
+flash_algorithms:
+- name: mdr32f1qi
+  description: 1986VE1 IAP 128kB Flash REV2
+  default: true
+  instructions: ACFQSMlDwWHBaIIVkUPBYAAgcEcAIEtJwEPIYUpIACEBYAFhgBUAaAhGcEfwtQAhREjJQ8FhwWiCFZFDwWBCSwEkHGBBSBhhACFBTw1GAyaIAFhgnWAcYB5gHGAfYAAgQBwoKPzbO0gYYDtKACBAHJBC/Ns5SBhgACAZIlIBQByQQvzbHGBJHAQp4dsdYAAg8L0AIHBH97UAISpIyUMVRsFhwWiCFZFDwWAnTidIMGEBIDBgAJhwYGgcAPBX+Cl4AAIIQ7BgACQlTzTgAJgAGXBgACBAHFAo/NsiSDBgACBAHCgo/Ns3YCgZQBwA8D74KV0AAghDsGAZSIAcMGA3YAAgQBxkKPzbFUiAMDBgACD/IZExQByIQvzbN2ASSDBgACBAHCgo/NsBIDBgACBAHCgo/NskHQGYhELH0wAgMGD+vQAAAAACQACAAUBRVaqKQQwAAEEsAAAA4gQAQSgAAEEwAABBEAAAQSAAAAN4wngZRkN4EgYbAhlDg3jAeBsEGUMRQwkCCQoABghDcEcAAAAAAAA=
+  pc_init: 0x1
+  pc_uninit: 0x15
+  pc_program_page: 0x97
+  pc_erase_sector: 0x93 #does absolutely nothing
+  pc_erase_all: 0x2d
+  data_section_offset: 0x190
+  flash_properties:
+    address_range:
+      start: 0x0
+      end: 0x20000
+    page_size: 0x400
+    erased_byte_value: 0xff
+    program_page_timeout: 10000
+    erase_sector_timeout: 30000
+    sectors:
+    - size: 0x400
+      address: 0x0
+- name: mdr32f9q2i_mdr32fg16s1qi
+  description: 1986BE IAP 128kB Flash
+  default: true
+  instructions: RUlP8P8wyGFESQhgACBwR0FJT/D/MMhhQUkAIAhgcEfwtT9KASMTYD5IEGEAIQxGAyVA9kFGiABQYJRgE2AVYBNgFmAAIEAcKCj820L2QUAQYDVPACBAHLhC/NtC9kEAEGAAIE/0SHdAHLhC/NsTYEkcBCnf2xRgACDwvQAgcEfwtSdOJ0szYQElNWBwYBN40vgBQEPqBCOzYAAjQ/JBBzTgxBh0YAAkZBxQLPzbQfJBBDRgACRkHCgs/Ns3YALrAwzUXNz4AcBE6gwktGBD8kMENGA3YAAkZBxkLPzbQ/LBBDRgACRP9Mh8ZBxkRfzbN2BC8kEENGAAJGQcKCz82zVgACRkHCgs/NsbHYtCyNMAIDBg8L0AAAAAAkCA4QDgAIABQFFVqooA4gQAAAAAAA==
+  pc_init: 0x1
+  pc_uninit: 0x11
+  pc_program_page: 0x81
+  pc_erase_sector: 0x7d #does absolutely nothing
+  pc_erase_all: 0x21
+  data_section_offset: 0x12c
+  flash_properties:
+    address_range:
+      start: 0x8000000
+      end: 0x8020000
+    page_size: 0x400
+    erased_byte_value: 0xff
+    program_page_timeout: 10000
+    erase_sector_timeout: 30000
+    sectors:
+    - size: 0x400
+      address: 0x0
